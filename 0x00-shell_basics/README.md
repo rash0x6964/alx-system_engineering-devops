@@ -1,1 +1,1 @@
-prints the absolute path
+shell basics
