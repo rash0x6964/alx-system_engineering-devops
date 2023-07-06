@@ -1,2 +1,2 @@
 #!/bin/bash
-chown -R betty --form=guillaume hello
+chown betty --from=guillaume hello
