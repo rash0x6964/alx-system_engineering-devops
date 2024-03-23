@@ -1,0 +1,36 @@
+DIAGRAM LINK: https://drive.google.com/file/d/1LAAtJ5uQq4D5Mu7Fr72VGkMYeNby0LRw/view?usp=sharing
+
+Additional element:
+
+    An other server for several reasons related to performance, scalability, and redundancy.
+    A load balancer is key to splitting traffic across the two web servers and achieving increased availability in this infrastructure.
+
+Load Balancer Distribution:
+
+    The HAproxy can be configured with various distribution algorithms, a common one being Round Robin. This distributes incoming requests sequentially across available web servers. For example, request 1 goes to web server 1, request 2 to web server 2, and so on. This ensures even load distribution.
+
+Active-Active vs. Active-Passive Load Balancing:
+
+    Active-Active: Both web servers actively handle user requests simultaneously. The load balancer distributes traffic for optimal performance and redundancy. If one server fails, the other continues serving requests without interruption.
+    Active-Passive: Only one web server is actively handling requests (primary). The other server (secondary) remains in standby mode, replicating data from the primary. If the primary fails, the load balancer switches to the secondary server, causing a brief service interruption.
+
+Database Primary-Replica Cluster:
+
+    This setup involves two MySQL servers:
+    -> Primary Node (Master): This server stores the actual website data and processes all write requests (updates, insertions).
+    -> Replica Node (Slave): This server keeps a copy of the primary's data in real-time. It doesn't process write requests directly but can be used for read-only operations (e.g., displaying user data) or take over as the primary if the primary fails.
+
+Difference between the Primary/Replica node:
+
+    The application on both web servers interacts primarily with the Primary node for write operations. Reads can be directed to either the Primary or a Replica for improved performance and redundancy.
+
+Issues with This Infrastructure:
+
+    Single Point of Failure (SPOF):
+        The database primary node is a SPOF. If it fails, the website becomes unavailable until it's restored.
+    Security Issues:
+        No firewall: The infrastructure lacks a firewall to filter incoming traffic and prevent malicious attacks.
+    No HTTPS:
+        Communication is unencrypted, making user data vulnerable to interception.
+    No Monitoring:
+        The absence of monitoring tools makes it difficult to identify performance issues or server failures proactively.
