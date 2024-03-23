@@ -1,0 +1,24 @@
+DIAGRAM LINK: https://drive.google.com/file/d/1hP4lCVjmz1UoBKfsmfd0E0LwOXXbnnZb/view?usp=sharing
+
+Server: A powerful computer specifically designed to run 24/7 and deliver resources (like websites) over a network. It acts as the central hub for our website.
+
+Web Server (Nginx): Software on the server responsible for receiving user requests (like opening www.foobar.com) and delivering the appropriate web pages. It acts as the middleman between the user and the application.
+
+Application Server: Software (often integrated with the web server in a LAMP stack) that interprets code written in languages like PHP or Python to generate dynamic content for the website. Think of it as the engine that processes your website's logic.
+
+Application Files (Codebase): The collection of code files written in a specific language that define the website's functionality and appearance. This is where your website's logic resides.
+
+Database (MySQL): A software program that stores website data like user information, articles, or product details. It acts as the website's memory.
+
+Domain Name (foobar.com): A user-friendly name that translates to the server's IP address (like 8.8.8.8 in this example). It's like a nickname for the website, easier to remember than a string of numbers.
+
+The type of DNS record "www" in www.foobar.com is a specific type of DNS record that points to the server's IP address called A record.
+
+Issues with this Infrastructure:
+
+1 - Single Point of Failure (SPOF): Everything relies on one server.
+    If the server crashes, the website goes down.
+2 - Downtime during Maintenance: Restarting the web server
+    (e.g., deploying new code) can cause temporary downtimefor the website.
+3 - Limited Scalability: This setup struggles with high traffic volumes.
+    The single server might not be able to handle a surge in user requests.
