@@ -1,0 +1,34 @@
+DIAGRAM LINK: https://drive.google.com/file/d/1QvunpYPP01XR_NWtZlufjefUVpYq7_6a/view?usp=sharing
+
+New Components:
+
+    -> Three Firewalls:
+        One placed in front of each web server (Server 1 &  Server 2) and another in front of the database cluster. These act as security gateways, inspecting incoming and outgoing traffic, filtering out malicious attempts and unauthorized access.
+    -> SSL Certificate:
+        This digital certificate encrypts communication between the user's browser and the web servers. It ensures data confidentiality and integrity, especially when transmitting sensitive information like login credentials.
+    -> Three Monitoring Clients:
+        These lightweight software agents are installed on each server (including the database servers). They collect performance metrics, resource utilization data, and error logs, sending them to a central monitoring service like Sumologic for analysis.
+
+What are firewalls for:
+
+    They significantly improve security by blocking unauthorized access attempts, malware intrusion, and other cyber threats.
+
+Why is the traffic served over HTTPS:
+
+    HTTPS Encrypted communication protects user data from eavesdropping and man-in-the-middle attacks.
+
+What monitoring is used for:
+
+    Proactive monitoring allows for early detection of performance bottlenecks, potential outages, and security incidents.
+
+How the monitoring tool is collecting data:
+
+    The monitoring client tracks various web server metrics, including QPS. This indicates how many requests the server can process per second, providing valuable insights into website performance and resource utilization.
+
+Issues with this Infrastructure:
+
+    SSL Termination at Load Balancer: While convenient, terminating SSL at the load balancer exposes the decrypted traffic between the load balancer and the web servers. If this internal network is compromised, attackers could potentially intercept sensitive data. Consider SSL termination directly on the web servers for added security.
+
+    Single Point of Failure (SPOF) at Database Primary: The architecture still relies on a single Primary database node for writes. If it fails, write operations become unavailable. Implementing a high availability solution like a MySQL Galera Cluster with multiple Primary nodes can eliminate this SPOF.
+
+    Same components: Having all components (database, web server, and application server) on each server can be inefficient. If a surge in traffic targets the database, it can overload the entire server, impacting web server performance as well. Consider containerization or virtualization technologies to isolate these components and allow for independent scaling.
