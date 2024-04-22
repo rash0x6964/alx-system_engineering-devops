@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+#  Install Nginx and configure it on a server
+
+sudo apt-get update
+sudo apt-get -y install nginx
+
+sudo ufw allow 'Nginx HTTP'
+
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+sudo service nginx restart
+
