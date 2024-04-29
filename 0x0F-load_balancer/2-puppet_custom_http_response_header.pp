@@ -8,7 +8,7 @@ package { 'nginx':
 file_line { 'install':
   ensure => 'present',
   path   => '/etc/nginx/sites-enabled/default',
-  after  => 'listen 80 default_server;',
+  after  => 'server_name _;',
   line   => 'rewrite ^/redirect_me https://twitter.com/rash0x6964 permanent;',
 }
 
@@ -16,9 +16,11 @@ file {'/var/www/html/index.html':
 	content => 'Hello World!'
 }
 
-exec {'HTTP header':
-	command => 'sed -i "s/server_name _;/server_name _;\n\tadd_header X-Served-By \$hostname;/" /etc/nginx/sites-enabled/default',
-	provider => 'shell'
+file_line { 'header':
+  ensure => 'present',
+  path   => '/etc/nginx/sites-enabled/default',
+  after  => 'server_name _;',
+  line   => 'add_header X-Served-By $hostname;',
 }
 
 service {'nginx':
