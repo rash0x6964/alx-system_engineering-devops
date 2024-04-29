@@ -17,7 +17,7 @@ file {'/var/www/html/index.html':
 }
 
 exec {'HTTP header':
-	command => 'sed -i "25i\	add_header X-Served-By \$hostname;" /etc/nginx/sites-available/default',
+	command => 'sed -i "s/server_name _;/server_name _;\n\tadd_header X-Served-By \$hostname;/" /etc/nginx/sites-enabled/default',
 	provider => 'shell'
 }
 
