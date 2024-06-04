@@ -19,8 +19,8 @@ def top_ten(subreddit):
         return
 
     try:
-        results = response.json().get("data", {})
-        for child in results.get("children", []):
+        data = response.json().get("data", {})
+        for child in data.get("children", []):
             title = child.get("data", {}).get("title", "None")
             print(title)
     except ValueError:
