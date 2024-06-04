@@ -7,13 +7,10 @@ import requests
 def top_ten(subreddit):
     """Print the titles of the 10 hottest posts on a given subreddit."""
 
-    url = "https://www.reddit.com/r/{}/hot/.json".format(subreddit)
-    headers = {"User-Agent": "0x16-api_advanced/task-1"}
-    params = {"limit": 10}
     response = requests.get(
-        url,
-        headers=headers,
-        params=params,
+        "https://www.reddit.com/r/{}/hot.json".format(subreddit),
+        headers={"User-Agent": "0x16-api_advanced/task-1"},
+        params={"limit": 10},
         allow_redirects=False
     )
 
