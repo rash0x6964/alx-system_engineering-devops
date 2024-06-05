@@ -1,8 +1,8 @@
 # Replace a line in a file
 
-file { '/var/www/html/wp-settings.php':
-  ensure  => present,
-  replace => {
-    '/phpp/' => 'php',
-  },
+$file_to_edit = '/var/www/html/wp-settings.php'
+
+exec { 'replace_line':
+  command => "sed -i 's/phpp/php/g' ${file_to_edit}",
+  path    => ['/bin','/usr/bin']
 }
